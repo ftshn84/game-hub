@@ -1,24 +1,8 @@
-import React, { useEffect, useState } from "react";
-import apiClient from "../assets/services/api-client";
 import { FormErrorMessage, Text } from "@chakra-ui/react";
-interface Game {
-  id: number;
-  name: string;
-}
-interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
-const GameGrid = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
+import useGames from "../hooks/useGames";
 
-  useEffect(() => {
-    apiClient
-      .get<FetchGamesResponse>("/xgames")
-      .then((res) => setGames(res.data.results))
-      .catch((err) => console.log(err.message));
-  });
+const GameGrid = () => {
+  const { games, error } = useGames(); // Assuming useGames is imported correctly
   return (
     <div>
       {error && <Text>{error}</Text>}
