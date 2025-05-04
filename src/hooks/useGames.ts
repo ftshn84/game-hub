@@ -4,13 +4,15 @@ import apiClient from "../assets/services/api-client";
 import { CanceledError } from "axios";
 // Removed unused import as the Game interface is already defined in this file
 // Removed unused import as the FetchGamesResponse interface is defined below
-interface Game {
+export interface Game {
+  background_image: string | undefined;
   id: number;
   name: string;
 }
 interface FetchGamesResponse {
   count: number;
   results: Game[];
+  background_image: string;
 }
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
