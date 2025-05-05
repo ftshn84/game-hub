@@ -11,6 +11,7 @@ export interface Platform {
 }
 
 export interface Game {
+  metacritic: number;
   parent_platforms: any;
   background_image: string | undefined;
   id: number;
@@ -21,6 +22,7 @@ interface FetchGamesResponse {
   results: Game[];
   background_image: string;
   parent_platforms: { platform: Platform }[];
+  metacritic: number;
 }
 [];
 const useGames = () => {
