@@ -1,8 +1,23 @@
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Image,
+  Link,
+  List,
+  ListItem,
+  Text,
+  // Removed Genre as it is not exported from @chakra-ui/react
+} from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../assets/services/image-url";
+// Ensure Genre is defined in a types file or replace with the correct path
+import { Genre } from "../hooks/useGenres"; // Adjust the import path as necessary
+interface Props {
+  onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
+}
 
-const GenreList = () => {
+const GenreList = ({ onSelectGenre }: Props) => {
   const { data } = useGenres(); // Assuming useGenres is imported correctly
   return (
     <List>
@@ -16,9 +31,14 @@ const GenreList = () => {
               objectFit="cover"
               alt={genre.name}
             />
-            <Text fontSize="lg" fontWeight="bold">
+            <Button
+              onClick={() => onSelectGenre(genre)}
+              fontSize="lg"
+              variant="Link"
+              fontWeight="bold"
+            >
               {genre.name}
-            </Text>
+            </Button>
           </HStack>
         </ListItem>
       ))}
