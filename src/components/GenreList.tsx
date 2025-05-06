@@ -17,12 +17,12 @@ interface Props {
   selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data } = useGenres(); // Assuming useGenres is imported correctly
   return (
     <List>
       {data.map((genre) => (
-        <ListItem key={genre.id} paddingY={2} paddingX={4} cursor="pointer">
+        <ListItem key={genre.id} paddingX={4} paddingY={1}>
           <HStack>
             <Image
               boxSize="32px"
@@ -32,10 +32,9 @@ const GenreList = ({ onSelectGenre }: Props) => {
               alt={genre.name}
             />
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"} // Highlight selected genre}>
               onClick={() => onSelectGenre(genre)}
-              fontSize="lg"
               variant="Link"
-              fontWeight="bold"
             >
               {genre.name}
             </Button>
