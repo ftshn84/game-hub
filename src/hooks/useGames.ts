@@ -23,8 +23,9 @@ const useGames = (gameQuery: GameQuery) =>
       params: {
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortOrder,
       },
     },
-    [gameQuery.genre?.id, gameQuery.platform?.id] // Add dependencies for genre and platform
+    [gameQuery] // Add dependencies for genre and platform
   );
 export default useGames;
