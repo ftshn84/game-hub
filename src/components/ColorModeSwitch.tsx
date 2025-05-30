@@ -16,3 +16,11 @@ const ColorModeSwitch = () => {
 };
 
 export default ColorModeSwitch;
+<input
+  className="chakra-switch__input"
+  type="checkbox"
+  aria-checked="true"
+  value=""
+  checked={true}
+  aria-label="Toggle dark mode"
+/>;
