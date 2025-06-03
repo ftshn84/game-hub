@@ -24,6 +24,7 @@ const useGames = (gameQuery: GameQuery) =>
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder,
+        search: gameQuery.searchText, // Add search text to the query parameters
       },
     },
     [gameQuery] // Add dependencies for genre and platform
