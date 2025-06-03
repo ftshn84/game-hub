@@ -14,6 +14,8 @@ export interface Game {
   background_image: string | undefined;
   id: number;
   name: string;
+  rating_top: number;
+  ratings: any[];
 }
 
 const useGames = (gameQuery: GameQuery) =>
