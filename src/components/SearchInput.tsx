@@ -1,0 +1,15 @@
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { BsSearch } from "react-icons/bs";
+
+const SearchInput = () => {
+  return (
+    <InputGroup>
+      <InputLeftElement children={<BsSearch />} />
+      <Input borderRadius={20} placeholder="Search games..." variant="fille">
+        {/* The Input component can be enhanced with additional props or event handlers as needed */}
+      </Input>
+    </InputGroup>
+  );
+};
+
+export default SearchInput;
