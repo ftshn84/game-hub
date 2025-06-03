@@ -6,6 +6,7 @@ import {
   Link,
   List,
   ListItem,
+  Spinner,
   Text,
   // Removed Genre as it is not exported from @chakra-ui/react
 } from "@chakra-ui/react";
@@ -19,7 +20,10 @@ interface Props {
 }
 
 const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
-  const { data } = useGenres(); // Assuming useGenres is imported correctly
+  const { data, isLoading, error } = useGenres();
+  // Assuming useGenres is imported correctly
+  if (error) return null;
+  if (isLoading) return <Spinner></Spinner>;
   return (
     <>
       <Heading fontSize="2xl" marginBottom={3}>
@@ -32,7 +36,11 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
               <Image
                 boxSize="32px"
                 borderRadius={8}
-                src={getCroppedImageUrl(genre.image_background)}
+                src={
+                  genre.platforms && genre.platforms.length > 0
+                    ? getCroppedImageUrl(genre.platforms[0].image_background)
+                    : undefined
+                }
                 objectFit="cover"
                 alt={genre.name}
               />
