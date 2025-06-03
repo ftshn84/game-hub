@@ -14,7 +14,7 @@ const GameCard = ({ game }: props) => {
     <Card>
       <Image
         src={getCroppedImageUrl(
-          game.background_image || "path/to/placeholder/image.jpg"
+          game.background_image || "no-image-placeholder.webp" // Fallback to a placeholder image if background_image is undefined
         )}
       ></Image>
       <CardBody>
