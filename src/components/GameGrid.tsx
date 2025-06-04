@@ -16,7 +16,7 @@ const GameGrid = ({ gameQuery }: Props) => {
   if (error) return <Text>{error}</Text>; // Display error message if there's an error
   return (
     <SimpleGrid
-      columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+      columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
       padding={10}
       spacing={5}
     >
