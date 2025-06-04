@@ -1,17 +1,21 @@
-import { Tooltip as ChakraTooltip, Portal } from "@chakra-ui/react"
-import * as React from "react"
+import {
+  Tooltip as ChakraTooltip,
+  Portal,
+  TooltipProps as ChakraTooltipRootProps,
+} from "@chakra-ui/react";
+import * as React from "react";
 
-export interface TooltipProps extends ChakraTooltip.RootProps {
-  showArrow?: boolean
-  portalled?: boolean
-  portalRef?: React.RefObject<HTMLElement>
-  content: React.ReactNode
-  contentProps?: ChakraTooltip.ContentProps
-  disabled?: boolean
+export interface TooltipProps extends Omit<ChakraTooltipRootProps, "content"> {
+  showArrow?: boolean;
+  portalled?: boolean;
+  portalRef?: React.RefObject<HTMLElement>;
+  content: React.ReactNode;
+  contentProps?: Record<string, any>;
+  disabled?: boolean;
 }
 
 export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
-  function Tooltip(props, ref) {
+  (props, ref) => {
     const {
       showArrow,
       children,
@@ -21,26 +25,29 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       contentProps,
       portalRef,
       ...rest
-    } = props
+    } = props;
 
-    if (disabled) return children
+    // ✅ Ensure children are wrapped properly when returning
+    if (disabled) {
+      return <>{children}</>; // Fix: Ensures a valid React element is always returned
+    }
 
-    return (
-      <ChakraTooltip.Root {...rest}>
-        <ChakraTooltip.Trigger asChild>{children}</ChakraTooltip.Trigger>
-        <Portal disabled={!portalled} container={portalRef}>
-          <ChakraTooltip.Positioner>
-            <ChakraTooltip.Content ref={ref} {...contentProps}>
-              {showArrow && (
-                <ChakraTooltip.Arrow>
-                  <ChakraTooltip.ArrowTip />
-                </ChakraTooltip.Arrow>
-              )}
-              {content}
-            </ChakraTooltip.Content>
-          </ChakraTooltip.Positioner>
-        </Portal>
-      </ChakraTooltip.Root>
-    )
-  },
-)
+    const tooltipElement = (
+      <ChakraTooltip
+        {...rest}
+        label={content}
+        hasArrow={showArrow}
+        ref={ref}
+        {...contentProps}
+      >
+        {children}
+      </ChakraTooltip>
+    );
+
+    if (portalled) {
+      return <Portal containerRef={portalRef}>{tooltipElement}</Portal>;
+    }
+
+    return tooltipElement;
+  }
+);
