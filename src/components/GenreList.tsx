@@ -13,6 +13,7 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../assets/services/image-url";
 // Ensure Genre is defined in a types file or replace with the correct path
+import { FeatchResponse } from "@/hooks/useData";
 import { Genre } from "../hooks/useGenres"; // Adjust the import path as necessary
 interface Props {
   onSelectGenre: (genre: Genre) => void;
@@ -30,7 +31,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
         Genres
       </Heading>
       <List>
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingX={4} paddingY={1}>
             <HStack>
               <Image

@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import apiClient from "../assets/services/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
-interface FeatchResponse<T> {
+export interface FeatchResponse<T> {
   count: number;
   results: T[];
 }
-
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
